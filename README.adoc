@@ -1,0 +1,52 @@
+= Cloudbees action: Scan with Coverity on Polaris SAST
+
+Use this action to scan repositories for vulnerabilities with the Coverity on Polaris SAST scanner.
+
+== Inputs
+
+[cols="2a,1a,1a,3a",options="header"]
+.Input details
+|===
+
+| Input name
+| Data type
+| Required?
+| Description
+
+| `server-url`
+| String
+| Yes
+| The Coverity on polaris server URL.
+
+| `api-token`
+| String
+| Yes
+| The Coverity on polaris api token.
+
+|===
+
+== Usage example
+
+In your YAML file, add:
+
+[source,yaml]
+----
+
+      - name: Scan with Coverity on Polaris SAST
+        uses: cloudbees-io/coverity-polaris-sast-scan-code@v1
+        with:
+          server-url: 'https://cloudbees.polaris.synopsys.com/'
+          api-token: 'YzUwN2Mz=='
+
+----
+
+
+== License
+
+This code is made available under the 
+link:https://opensource.org/license/mit/[MIT license].
+
+== References
+
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform-actions/latest/[using actions in CloudBees workflows].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform/latest/[the CloudBees platform].

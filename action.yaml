@@ -1,0 +1,72 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: action
+name: blackduck-hybrid
+inputs:
+  server-url: 
+    description: 'Server URL'
+    required: true
+  api-token:  
+    description: 'API token'
+    required: true
+  ref:
+    description: 'Flag to indicate the ref that should be archived (same as supplied to checkout)'
+    required: false
+    default: ''
+  workspace-dir:
+    description: 'Flag to mention the path where the checked out code will be present'
+    required: false
+    default: ''
+
+
+runs:
+  using: composite
+  steps:
+    - name: Generate sha and ref 
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:c7cbcb9a27d7f75effc0237ae78a96192402d81b
+      with:
+        entrypoint: assets-plugin-chain-utils
+        args: get-commit-info
+      env:
+        INPUT_CLOUDBEES_API_TOKEN: ${{ cloudbees.api.token }}
+        INPUT_CLOUDBEES_API_URL: ${{ cloudbees.api.url }}
+        INPUT_RUN_ID: ${{ cloudbees.run_id }}
+        INPUT_CLOUDBEES_EVENT_PATH: /cloudbees/event.json
+        INPUT_REF: ${{ inputs.ref }}
+        INPUT_WORKSPACE_DIR: ${{ inputs.workspace-dir }}
+
+    - name: Generate reference files 
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:c7cbcb9a27d7f75effc0237ae78a96192402d81b
+      with:
+          entrypoint: assets-plugin-chain-utils
+          args: generate-references --asset-type "CODE"
+      env:
+          INPUT_CLOUDBEES_API_TOKEN: ${{ cloudbees.api.token }}
+          INPUT_CLOUDBEES_API_URL: ${{ cloudbees.api.url }}
+          INPUT_RUN_ID: ${{ cloudbees.run_id }}
+
+    - name: Print polaris conf
+      uses: docker://golang:latest
+      run: |
+        chmod 777 /cloudbees/workspace/store/*
+        ls -al /cloudbees/workspace/store/
+
+    - name: Run coverity on polaris compliance plugin
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/plugin-coverity-sca:5d56e78cf87dde7d7e31818cfba23df7012afbc2
+      env:
+          RUN_ID: ${{ cloudbees.run_id }}
+          JOB_ID: ${{ job.id }}
+          STEP_ID: ${{ step.internal.id }}
+          POLARIS_SERVER_URL: ${{ inputs.server-url }}
+          POLARIS_ACCESS_TOKEN: ${{ inputs.api-token }}
+      run: /app/myapp -mode single
+
+    - name: Complete execution plan
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:c7cbcb9a27d7f75effc0237ae78a96192402d81b
+      id: process-outputs
+      with:
+          entrypoint: assets-plugin-chain-utils
+          args: process-outputs
+      env:
+          INPUT_CLOUDBEES_API_TOKEN: ${{ cloudbees.api.token }} 
+          INPUT_CLOUDBEES_API_URL: ${{ cloudbees.api.url }}
+          INPUT_RUN_ID: ${{ cloudbees.run_id }}
