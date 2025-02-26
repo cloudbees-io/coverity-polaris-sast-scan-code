@@ -1,4 +1,4 @@
-= Cloudbees action: Scan with Coverity on Polaris SAST
+= CloudBees action: Scan with Coverity on Polaris SAST
 
 Use this action to scan repositories for vulnerabilities with the Coverity on Polaris SAST scanner.
 
@@ -23,6 +23,12 @@ Use this action to scan repositories for vulnerabilities with the Coverity on Po
 | Yes
 | The Coverity on polaris api token.
 
+| `ref`
+| String
+| Yes
+| Flag to indicate the ref that should be archived (same as supplied to checkout).
+
+
 |===
 
 == Usage example
@@ -37,6 +43,7 @@ In your YAML file, add:
         with:
           server-url: 'https://cloudbees.polaris.synopsys.com/'
           api-token: 'YzUwN2Mz=='
+          ref: main
 
 ----
 
