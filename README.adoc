@@ -1,6 +1,6 @@
-= Cloudbees action: Scan with Coverity on Polaris SAST
+= CloudBees action: Scan with Coverity on Polaris SAST
 
-Use this action to scan repositories for vulnerabilities with the Coverity on Polaris SAST scanner.
+Use this action to perform static application security testing (SAST) on a repository with the Coverity on Polaris scanner from Black Duck.
 
 == Inputs
 
@@ -16,12 +16,17 @@ Use this action to scan repositories for vulnerabilities with the Coverity on Po
 | `server-url`
 | String
 | Yes
-| The Coverity on polaris server URL.
+| The Coverity on Polaris server URL.
 
 | `api-token`
 | String
 | Yes
-| The Coverity on polaris api token.
+| The Coverity on Polaris API token.
+
+| `ref`
+| String
+| Yes
+| Specify the ref that should be checked out and archived.
 
 |===
 
@@ -32,14 +37,14 @@ In your YAML file, add:
 [source,yaml]
 ----
 
-      - name: Scan with Coverity on Polaris SAST
-        uses: cloudbees-io/coverity-polaris-sast-scan-code@v1
+      - name: Scan with Coverity on Polaris
+        uses: https://github.com/cloudbees-io/coverity-polaris-sast-scan-code@v1
         with:
-          server-url: 'https://cloudbees.polaris.synopsys.com/'
-          api-token: 'YzUwN2Mz=='
+          server-url: ${{ vars.COVERITY_POLARIS_SERVER_URL }}
+          api-token: ${{ secrets.COVERITY_POLARIS_TOKEN }}
+          ref: main
 
 ----
-
 
 == License
 
@@ -48,5 +53,5 @@ link:https://opensource.org/license/mit/[MIT license].
 
 == References
 
-* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform-actions/latest/[using actions in CloudBees workflows].
-* Learn about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform/latest/[the CloudBees platform].
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/actions[using actions in CloudBees workflows].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-platform/latest/[the CloudBees platform].
