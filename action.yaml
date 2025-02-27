@@ -69,6 +69,7 @@ runs:
             rm polaris.yml
             ls -al
             cd ..
+            ls -al TempDir
             tar -cvf "$ZIP_FILE" TempDir
             rm -rf TempDir
         else
