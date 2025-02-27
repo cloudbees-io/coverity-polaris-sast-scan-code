@@ -60,6 +60,7 @@ runs:
             echo "Unzipping: $ZIP_FILE"
             file "$ZIP_FILE"
             # unzip "$ZIP_FILE" -d /cloudbees/workspace/store/binary-assets
+            mkdir TempDir
             tar -xvf "$ZIP_FILE" -C TempDir 
             ls -al    
             cd TempDir
