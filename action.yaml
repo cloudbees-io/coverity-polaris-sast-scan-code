@@ -62,14 +62,12 @@ runs:
             # unzip "$ZIP_FILE" -d /cloudbees/workspace/store/binary-assets
             mkdir TempDir
             tar -xvf "$ZIP_FILE" -C TempDir 
-            ls -al    
             cd TempDir
-            ls -al
             cat polaris.yml 
             // rm polaris.yml
             export GIT_COMMIT_DATE="2024-02-27"
             sed -i 's/\${scm.git.commit.date}/\${env.GIT_COMMIT_DATE}/g' polaris.yml
-            ls -al
+            cat polaris.yml
             cd ..
             tar -cvf "$ZIP_FILE" TempDir
             rm -rf TempDir
