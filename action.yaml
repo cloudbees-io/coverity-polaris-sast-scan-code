@@ -44,11 +44,38 @@ runs:
           INPUT_CLOUDBEES_API_URL: ${{ cloudbees.api.url }}
           INPUT_RUN_ID: ${{ cloudbees.run_id }}
 
-    - name: Print polaris conf
+    - name: polaris setup
       uses: docker://golang:latest
       run: |
+        apt-get update && apt-get install -y unzip file
         chmod 777 /cloudbees/workspace/store/*
         ls -al /cloudbees/workspace/store/
+        cd /cloudbees/workspace/store/binary-assets
+        ls -al
+        # Find the first zip file in the directory
+        ZIP_FILE=$(ls -1 /cloudbees/workspace/store/binary-assets/*.bin 2>/dev/null | head -n 1)
+        
+        # Check if a zip file exists
+        if [ -n "$ZIP_FILE" ]; then
+            echo "Unzipping: $ZIP_FILE"
+            file "$ZIP_FILE"
+            # unzip "$ZIP_FILE" -d /cloudbees/workspace/store/binary-assets
+            mkdir TempDir
+            tar -xvf "$ZIP_FILE" -C TempDir 
+            ls -al    
+            cd TempDir
+            ls -al
+            cat polaris.yml 
+            // rm polaris.yml
+            export GIT_COMMIT_DATE="2024-02-27"
+            sed -i 's/\${scm.git.commit.date}/\${env.GIT_COMMIT_DATE}/g' polaris.yml
+            ls -al
+            cd ..
+            tar -cvf "$ZIP_FILE" TempDir
+            rm -rf TempDir
+        else
+            echo "No zip file found in $DIR"
+        fi          
 
     - name: Run coverity on polaris compliance plugin
       uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/plugin-coverity-sca:5d56e78cf87dde7d7e31818cfba23df7012afbc2
