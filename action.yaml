@@ -64,8 +64,8 @@ runs:
         else
             echo "No zip file found in $DIR"
         fi
-        ls -al
-        
+        ls -al        
+        cat polaris.yml        
 
     - name: Run coverity on polaris compliance plugin
       uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/plugin-coverity-sca:5d56e78cf87dde7d7e31818cfba23df7012afbc2
