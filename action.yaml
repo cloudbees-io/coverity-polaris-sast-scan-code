@@ -60,19 +60,19 @@ runs:
             echo "Unzipping: $ZIP_FILE"
             file "$ZIP_FILE"
             # unzip "$ZIP_FILE" -d /cloudbees/workspace/store/binary-assets
-            mkdir TempDir
-            tar -xf "$ZIP_FILE" -C TempDir 
-            cd TempDir
-            cat polaris.yml 
+            #mkdir TempDir
+            #tar -xf "$ZIP_FILE" -C TempDir 
+            #cd TempDir
+            #cat polaris.yml 
             # rm polaris.yml           
-            sed -i 's/\${scm.git.commit.date}/\${env.GIT_COMMIT_DATE}/g' polaris.yml
+            #sed -i 's/\${scm.git.commit.date}/\${env.GIT_COMMIT_DATE}/g' polaris.yml
             echo "##################################################"
             echo "##################################################"
-            cat polaris.yml
-            cd ..
-            tar -cf "$ZIP_FILE" TempDir
-            rm -rf TempDir
-            ls -al
+            #cat polaris.yml
+            #cd ..
+            #tar -cf "$ZIP_FILE" TempDir
+            #rm -rf TempDir
+            #ls -al
         else
             echo "No zip file found in $DIR"
         fi          
