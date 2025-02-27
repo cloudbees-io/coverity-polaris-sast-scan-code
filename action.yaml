@@ -58,7 +58,9 @@ runs:
         # Check if a zip file exists
         if [ -n "$ZIP_FILE" ]; then
             echo "Unzipping: $ZIP_FILE"
-            unzip "$ZIP_FILE" -d /cloudbees/workspace/store/binary-assets
+            file "$ZIP_FILE"
+            # unzip "$ZIP_FILE" -d /cloudbees/workspace/store/binary-assets
+            tar -xvf "$ZIP_FILE"             
         else
             echo "No zip file found in $DIR"
         fi
