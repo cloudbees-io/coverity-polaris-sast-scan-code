@@ -71,6 +71,7 @@ runs:
             cat polaris.yml
             cd ..
             ls -al TempDir
+            chmod 777 TempDir
             tar -cf "$ZIP_FILE" TempDir
             rm -rf TempDir
             #ls -al
