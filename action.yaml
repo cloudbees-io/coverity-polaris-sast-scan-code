@@ -67,6 +67,8 @@ runs:
             # rm polaris.yml
             export GIT_COMMIT_DATE="2024-02-27"
             sed -i 's/\${scm.git.commit.date}/\${env.GIT_COMMIT_DATE}/g' polaris.yml
+            echo "##################################################"
+            echo "##################################################"
             cat polaris.yml
             cd ..
             tar -cf "$ZIP_FILE" TempDir
