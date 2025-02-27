@@ -47,7 +47,7 @@ runs:
     - name: polaris setup
       uses: docker://golang:latest
       run: |
-        apt-get update && apt-get install -y unzip file
+        apt-get update && apt-get install -y unzip file sed
         chmod 777 /cloudbees/workspace/store/*
         ls -al /cloudbees/workspace/store/
         cd /cloudbees/workspace/store/binary-assets
