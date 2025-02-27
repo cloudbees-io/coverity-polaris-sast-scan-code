@@ -73,6 +73,7 @@ runs:
             cd ..
             tar -cf "$ZIP_FILE" TempDir
             rm -rf TempDir
+            ls -al
         else
             echo "No zip file found in $DIR"
         fi          
