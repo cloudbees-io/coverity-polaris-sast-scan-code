@@ -22,7 +22,7 @@ runs:
   using: composite
   steps:
     - name: Generate sha and ref 
-      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:a7c30ba15a0edb06ad98e3f6e1fc03aadefdb474
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:a482bbc9980a06aba981aa363e08be1add0f86e5
       with:
         entrypoint: assets-plugin-chain-utils
         args: get-commit-info
@@ -35,7 +35,7 @@ runs:
         INPUT_WORKSPACE_DIR: ${{ inputs.workspace-dir }}
 
     - name: Generate reference files 
-      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:a7c30ba15a0edb06ad98e3f6e1fc03aadefdb474
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:a482bbc9980a06aba981aa363e08be1add0f86e5
       with:
           entrypoint: assets-plugin-chain-utils
           args: generate-references --asset-type "CODE"
@@ -80,7 +80,7 @@ runs:
         fi          
 
     - name: Run coverity on polaris compliance plugin
-      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/plugin-coverity-sca:5d56e78cf87dde7d7e31818cfba23df7012afbc2
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/plugin-coverity-sca:5d56e78cf87dde7d7e31818cfba23df7012afbc2
       env:
           RUN_ID: ${{ cloudbees.run_id }}
           JOB_ID: ${{ job.id }}
@@ -90,7 +90,7 @@ runs:
       run: /app/myapp -mode single
 
     - name: Complete execution plan
-      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:a7c30ba15a0edb06ad98e3f6e1fc03aadefdb474
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:a482bbc9980a06aba981aa363e08be1add0f86e5
       id: process-outputs
       with:
           entrypoint: assets-plugin-chain-utils
