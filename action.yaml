@@ -22,7 +22,7 @@ runs:
   using: composite
   steps:
     - name: Generate sha and ref 
-      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:c7cbcb9a27d7f75effc0237ae78a96192402d81b
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:a7c30ba15a0edb06ad98e3f6e1fc03aadefdb474
       with:
         entrypoint: assets-plugin-chain-utils
         args: get-commit-info
@@ -35,7 +35,7 @@ runs:
         INPUT_WORKSPACE_DIR: ${{ inputs.workspace-dir }}
 
     - name: Generate reference files 
-      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:c7cbcb9a27d7f75effc0237ae78a96192402d81b
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:a7c30ba15a0edb06ad98e3f6e1fc03aadefdb474
       with:
           entrypoint: assets-plugin-chain-utils
           args: generate-references --asset-type "CODE"
@@ -62,17 +62,17 @@ runs:
             # unzip "$ZIP_FILE" -d /cloudbees/workspace/store/binary-assets
             mkdir cbp-gh-refdata
             tar -xf "$ZIP_FILE" -C cbp-gh-refdata 
-            cd cbp-gh-refdata
-            cat polaris.yml 
+            #cd cbp-gh-refdata
+            #cat polaris.yml 
             # rm polaris.yml           
-            sed -i 's/\${scm.git.commit.date}/\${sys.GIT_COMMIT_DATE}/g' polaris.yml
+            #sed -i 's/\${scm.git.commit.date}/\${sys.GIT_COMMIT_DATE}/g' polaris.yml
             echo "\n ##################################################"
             echo "##################################################"
-            cat polaris.yml
-            cd ..
+            #cat polaris.yml
+            #cd ..
             ls -al cbp-gh-refdata
-            chmod 777 cbp-gh-refdata
-            tar -cf "$ZIP_FILE" cbp-gh-refdata
+            #chmod 777 cbp-gh-refdata
+            #tar -cf "$ZIP_FILE" cbp-gh-refdata
             rm -rf cbp-gh-refdata
             #ls -al
         else
@@ -90,7 +90,7 @@ runs:
       run: /app/myapp -mode single
 
     - name: Complete execution plan
-      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:c7cbcb9a27d7f75effc0237ae78a96192402d81b
+      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/assets-plugin-chain-utils:a7c30ba15a0edb06ad98e3f6e1fc03aadefdb474
       id: process-outputs
       with:
           entrypoint: assets-plugin-chain-utils
