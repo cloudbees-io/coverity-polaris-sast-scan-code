@@ -50,7 +50,7 @@ runs:
         chmod 777 /cloudbees/workspace/store/*
 
     - name: Run coverity on polaris compliance plugin
-      uses: docker://020229604682.dkr.ecr.us-east-1.amazonaws.com/actions/plugin-coverity-sca:5d56e78cf87dde7d7e31818cfba23df7012afbc2
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/plugin-coverity-sca:5d56e78cf87dde7d7e31818cfba23df7012afbc2
       env:
           RUN_ID: ${{ cloudbees.run_id }}
           JOB_ID: ${{ job.id }}
