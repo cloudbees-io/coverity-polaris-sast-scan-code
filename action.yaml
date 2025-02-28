@@ -65,7 +65,7 @@ runs:
             cd TempDir
             cat polaris.yml 
             # rm polaris.yml           
-            sed -i 's/\${scm.git.commit.date}/\${env.GIT_COMMIT_DATE}/g' polaris.yml
+            sed -i 's/\${scm.git.commit.date}/\${sys.GIT_COMMIT_DATE}/g' polaris.yml
             echo "\n ##################################################"
             echo "##################################################"
             cat polaris.yml
