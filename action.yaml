@@ -52,32 +52,7 @@ runs:
         ls -al /cloudbees/workspace/store/
         cd /cloudbees/workspace/store/binary-assets
         ls -al
-        # Find the first zip file in the directory
-        ZIP_FILE=$(ls -1 /cloudbees/workspace/store/binary-assets/*.bin 2>/dev/null | head -n 1)
         
-        # Check if a zip file exists
-        if [ -n "$ZIP_FILE" ]; then
-            echo "Unzipping: $ZIP_FILE"
-            file "$ZIP_FILE"
-            # unzip "$ZIP_FILE" -d /cloudbees/workspace/store/binary-assets
-            mkdir cbp-gh-refdata
-            tar -xf "$ZIP_FILE" -C cbp-gh-refdata 
-            #cd cbp-gh-refdata
-            #cat polaris.yml 
-            # rm polaris.yml           
-            #sed -i 's/\${scm.git.commit.date}/\${sys.GIT_COMMIT_DATE}/g' polaris.yml
-            echo "\n ##################################################"
-            echo "##################################################"
-            #cat polaris.yml
-            #cd ..
-            ls -al cbp-gh-refdata
-            #chmod 777 cbp-gh-refdata
-            #tar -cf "$ZIP_FILE" cbp-gh-refdata
-            rm -rf cbp-gh-refdata
-            #ls -al
-        else
-            echo "No zip file found in $DIR"
-        fi          
 
     - name: Run coverity on polaris compliance plugin
       uses: docker://public.ecr.aws/l7o7z1g8/actions/plugin-coverity-sca:5d56e78cf87dde7d7e31818cfba23df7012afbc2
