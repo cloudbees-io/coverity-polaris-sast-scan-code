@@ -1,6 +1,6 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: action
-name: blackduck-hybrid
+name: coverity-hybrid
 inputs:
   server-url: 
     description: 'Server URL'
