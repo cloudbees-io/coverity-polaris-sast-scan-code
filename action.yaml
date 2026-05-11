@@ -37,7 +37,7 @@ runs:
   using: composite
   steps:
     - name: Generate sha and ref 
-      uses: docker://public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:1f95fd45dd03fa6f363ff95cb20142fe4b7d83c4
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:55e4d3b447658bcbaa6898718f6428fc54063829
       with:
         entrypoint: assets-plugin-chain-utils
         args: get-commit-info
@@ -50,7 +50,7 @@ runs:
         INPUT_WORKSPACE_DIR: ${{ inputs.workspace-dir }}
 
     - name: Generate reference files 
-      uses: docker://public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:1f95fd45dd03fa6f363ff95cb20142fe4b7d83c4
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:55e4d3b447658bcbaa6898718f6428fc54063829
       with:
           entrypoint: assets-plugin-chain-utils
           args: generate-references --asset-type "CODE"
@@ -76,7 +76,7 @@ runs:
       run: /app/myapp -mode single
 
     - name: Complete execution plan
-      uses: docker://public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:1f95fd45dd03fa6f363ff95cb20142fe4b7d83c4
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/assets-plugin-chain-utils:55e4d3b447658bcbaa6898718f6428fc54063829
       id: process-outputs
       with:
           entrypoint: assets-plugin-chain-utils
