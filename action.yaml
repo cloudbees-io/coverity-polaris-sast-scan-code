@@ -66,7 +66,7 @@ runs:
         ls -al /cloudbees/workspace/store/
 
     - name: Run coverity on polaris compliance plugin
-      uses: docker://public.ecr.aws/l7o7z1g8/actions/plugin-coverity-sca:5d56e78cf87dde7d7e31818cfba23df7012afbc2
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/plugin-coverity-sca:ef821eef806b09a210057f1c8e29c40375c0be7b
       env:
           RUN_ID: ${{ cloudbees.run_id }}
           JOB_ID: ${{ job.id }}
